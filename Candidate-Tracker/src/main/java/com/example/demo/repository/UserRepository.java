@@ -7,11 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.Users;
+import com.example.demo.model.LoginUser;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Integer>{
+public interface UserRepository extends JpaRepository<LoginUser, Integer>{
 
-	@Query("select u from Users u where u.email=?1")
-    Optional<Users> findByMyEmail(String email);
+	@Query("select u from LoginUser u where u.email=?1")
+    Optional<LoginUser> findByMyEmail(String email);
+
+	LoginUser findByEmail(String email);
+	
+	
 }

@@ -1,20 +1,28 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Login",schema = "hr")
-public class Users {
+@Table(name = "login_user",schema = "hr")
+public class LoginUser {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
 	private String email;
@@ -24,17 +32,23 @@ public class Users {
 	private Role role;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "ACCOUNTSTATUS")
+	@Column(name = "accountStatus")
 	private AccountStatus accountStatus;
-	@Column(name = "LASTLOGIN")
+	@Column(name = "lastLogin")
 	private String lastLogin;
-	@Column(name = "LASTIPADDRESS")
+	@Column(name = "lastIpAddress")
 	private String lastIpAddr;
-	@Column(name = "CREATIONDATE")
+	@Column(name = "creationDate")
 	private LocalDate creationDate;
 
 	
-	public Users(int id, String email, String password, Role role, AccountStatus accountStatus, String lastLogin,
+	
+    
+    
+  
+	
+
+	public LoginUser(int id, String email, String password, Role role, AccountStatus accountStatus, String lastLogin,
 			String lastIpAddr, LocalDate creationDate) {
 		super();
 		this.id = id;
@@ -42,9 +56,10 @@ public class Users {
 		this.password = password;
 		this.role = role;
 		this.accountStatus = accountStatus;
-		this.lastLogin = lastLogin;
-		this.lastIpAddr = lastIpAddr;
-		this.creationDate = creationDate;
+	
+		this.creationDate=LocalDate.now();
+		this.lastIpAddr="";
+		this.lastLogin="";
 	}
 
 	@Override
@@ -119,8 +134,10 @@ public class Users {
 	}
 	
 	
-	public Users() {
-		
+	public LoginUser() {
+		this.creationDate=LocalDate.now();
+		this.lastIpAddr="";
+		this.lastLogin="";
 	}
 	
 	

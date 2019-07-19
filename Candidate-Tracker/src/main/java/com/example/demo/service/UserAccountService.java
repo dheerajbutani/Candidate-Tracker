@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.AccountStatus;
 import com.example.demo.model.LoginUser;
+import com.example.demo.model.Role;
 import com.example.demo.model.UserManager;
 import com.example.demo.repository.UserManagerRepository;
 import com.example.demo.repository.UserRepository;
@@ -22,11 +23,33 @@ public class UserAccountService {
 	@Autowired
 	private UserManagerRepository userManagerRepository;
 
+	
+	@Transactional
+	public boolean checkAvailability(String email) {
+
+		      
+   	Optional<LoginUser> u=userRepository.findByMyEmail(email);
+//	System.out.println(u.get());
+
+	
+            if(u.isPresent())
+            {
+            		System.out.println("success");
+            		return true;
+            		
+            		}
+            System.out.println("fail");
+           return false;		
+	}
+	
+	
 	@Transactional
 	public void createUserAccount(LoginUser user, int parent_id) {
 
 		Optional<LoginUser> u = userRepository.findById(parent_id);
 
+		
+		
 		UserManager userManager = new UserManager();
 		System.out.println(user);
 		if (u.isPresent()) {
@@ -50,6 +73,10 @@ public class UserAccountService {
 			System.out.println(userManager.toString());
 			userManagerRepository.save(userManager);
 
+			UserManager usermanager1=new UserManager();
+			usermanager1.setChildId(user.getId());
+			usermanager1.setParentId(user.getId());
+			userManagerRepository.save(usermanager1);
 		}
 
 	}
@@ -58,10 +85,10 @@ public class UserAccountService {
 
 		System.out.println(parentId);
 		if (userRepository.findById(parentId).get().getAccountStatus().toString().equals("ACTIVE")) {
-			List<Optional<UserManager>> userManagers = userManagerRepository.findByParentId(parentId);
+			List<UserManager> userManagers = userManagerRepository.findByParentId(parentId);
 			LoginUser user = userRepository.findByEmail(email);
 			if (user != null) {
-				boolean isParent = userManagers.stream().anyMatch((x) -> x.get().getChildId() == user.getId());
+				boolean isParent = userManagers.stream().anyMatch((x) -> x.getChildId() == user.getId());
 				if(isParent) {
 				user.setAccountStatus(AccountStatus.INACTIVE);
 				userRepository.save(user);
@@ -75,6 +102,13 @@ public class UserAccountService {
 		}
 
 		return "You are not an ACTIVE user";
+	}
+	
+	
+
+	public List<LoginUser> getActiveInterviewers(){
+		List<LoginUser>interviewers= userRepository.findByRoleAndAccountStatus(Role.INTERVIEWER,AccountStatus.ACTIVE);
+		return interviewers;
 	}
 
 }

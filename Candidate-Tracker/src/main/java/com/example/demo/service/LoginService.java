@@ -30,20 +30,15 @@ public class LoginService {
 		
                 if(u.isPresent())
                 	if(u.get().getPassword().equals(password))
+                		{
+                		System.out.println("success");
                 		return true;
-               
+                		
+                		}
+                System.out.println("fail");
                return false;		
 		}
-	@Transactional
-	public boolean checkAvailability(String email) {
-		Optional<LoginUser> u=userRepository.findByMyEmail(email);
-
-
-        if(u.isPresent())
-        		return true;
-       
-       return false;
-	}
+	
 	
 	
 	}

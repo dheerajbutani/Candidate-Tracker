@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,7 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "login_user",schema = "hr")
@@ -41,32 +44,81 @@ public class LoginUser {
 	@Column(name = "creationDate")
 	private LocalDate creationDate;
 
+	private String firstName;
 	
+	private String lastName;
 	
-    
-    
-  
+	private String mobile;
+
 	
+	@Transient
+	@OneToMany(mappedBy="loginUser")
+	private List<Candidate> candidates;
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+
+
+
+
+	public List<Candidate> getCandidates() {
+		return candidates;
+	}
+
+	public void setCandidates(List<Candidate> candidates) {
+		this.candidates = candidates;
+	}
+
+
 
 	public LoginUser(int id, String email, String password, Role role, AccountStatus accountStatus, String lastLogin,
-			String lastIpAddr, LocalDate creationDate) {
+			String lastIpAddr, LocalDate creationDate, String firstName, String lastName, String mobile,
+			List<Candidate> candidates) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.role = role;
 		this.accountStatus = accountStatus;
-	
-		this.creationDate=LocalDate.now();
-		this.lastIpAddr="";
-		this.lastLogin="";
+		this.lastLogin = lastLogin;
+		this.lastIpAddr = lastIpAddr;
+		this.creationDate = creationDate;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobile = mobile;
+		this.candidates = candidates;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + ", accountStatus="
-				+ accountStatus + ", lastLogin=" + lastLogin + ", lastIpAddr=" + lastIpAddr + ", creationDate="
-				+ creationDate + "]";
+		return "LoginUser [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", accountStatus=" + accountStatus + ", lastLogin=" + lastLogin + ", lastIpAddr=" + lastIpAddr
+				+ ", creationDate=" + creationDate + ", firstName=" + firstName + ", lastName=" + lastName + ", mobile="
+				+ mobile + ", candidates=" + candidates + "]";
 	}
 
 	public int getId() {
@@ -143,3 +195,20 @@ public class LoginUser {
 	
 
 }
+//{
+//    "loginuser": {
+//        "id": 0,
+//        "email": "draj@gmail.com",
+//        "password": "abcd",
+//        "role": "ROOT",
+//        "accountStatus": "ACTIVE",
+//        "lastLogin": "",
+//        "lastIpAddr": "",
+//        "creationDate": null,
+//        "childrens": [],
+//        "parents": []
+//    },
+//    "parentid": {
+//        "parentid": 1
+//    }
+//}

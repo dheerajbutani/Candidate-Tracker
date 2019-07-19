@@ -1,17 +1,16 @@
 package com.example.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.service.LoginService;
 
-@Controller
+@CrossOrigin(origins="*")
+@RestController
 public class LoginController {
 	
 	@Autowired
@@ -31,13 +30,16 @@ public class LoginController {
 	
 	
 	
-	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	@ResponseBody
+	@RequestMapping(value = "/login",method = RequestMethod.POST,produces="application/json")
 	public String doLogIn(@RequestBody LoginRequest request){
 	System.out.println(request.toString());
 	boolean b=loginService.checkUser(request.getEmail(), request.getPassword());
-	return b?"Login Success":"Login failed";
-	
-	
+	//return b?"Login Success":"Login failed";
+	//return "{sfsf}";
+
+	if(b)
+	return "{\"value\":\"success\"}";
+	else return "{\"value\":\"failure\"}";
+
 	}
 }

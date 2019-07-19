@@ -13,7 +13,7 @@ public interface UserManagerRepository extends JpaRepository<UserManager, Intege
 
 	List<Optional<UserManager>> findByChildId(int i);
 
-	List<Optional<UserManager>> findByParentId(int id);
+	List<UserManager> findByParentId(int id);
 
 	
 	

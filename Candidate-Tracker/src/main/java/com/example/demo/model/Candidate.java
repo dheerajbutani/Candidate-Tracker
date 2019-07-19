@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -49,6 +52,9 @@ public class Candidate {
 	private LoginUser loginUser;
 	
 
+	
+
+	
 
 	public Candidate(int id, String email, String firstName, String lastName, String mobile, String address,
 			String currentLocation, String preferredLocation, Double currentCtc, Double expectedCtc, int round,
@@ -68,6 +74,7 @@ public class Candidate {
 		this.candidateStatus = candidateStatus;
 		this.profileCreationDate = profileCreationDate;
 		this.loginUser = loginUser;
+		
 	}
 
 	@Override
@@ -76,7 +83,7 @@ public class Candidate {
 				+ ", mobile=" + mobile + ", address=" + address + ", currentLocation=" + currentLocation
 				+ ", preferredLocation=" + preferredLocation + ", currentCtc=" + currentCtc + ", expectedCtc="
 				+ expectedCtc + ", round=" + round + ", candidateStatus=" + candidateStatus + ", profileCreationDate="
-				+ profileCreationDate + ", loginUser=" + loginUser + "]";
+				+ profileCreationDate + ", loginUser=" + loginUser +  "]";
 	}
 
 	public Candidate() {

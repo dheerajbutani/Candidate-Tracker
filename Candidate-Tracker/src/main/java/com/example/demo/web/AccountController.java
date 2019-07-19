@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.AccountStatus;
 import com.example.demo.model.LoginUser;
 import com.example.demo.service.UserAccountService;
 
@@ -40,7 +41,7 @@ return useraccountservice.checkAvailability(emailJson);
 	@RequestMapping(value="/createaccount",method=RequestMethod.POST)
 	@ResponseBody
 	public AccountRequest createAccount(@RequestBody AccountRequest accountrequest){
-		
+		accountrequest.getLoginuser().setAccountStatus(AccountStatus.ACTIVE);
 		useraccountservice.createUserAccount(accountrequest.getLoginuser(), accountrequest.getParentid().getParentid());
 		return accountrequest;
 		
@@ -59,6 +60,7 @@ return useraccountservice.checkAvailability(emailJson);
 	@ResponseBody
 	public List<LoginUser> getActiveInterviewers() {
 
+		
 	return	useraccountservice.getActiveInterviewers();
 	}
 	

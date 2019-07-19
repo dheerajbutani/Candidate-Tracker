@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.CandidateResponse;
 import com.example.demo.model.Candidate;
 import com.example.demo.model.UserManager;
 import com.example.demo.repository.UserManagerRepository;
@@ -38,10 +39,10 @@ public class CandidateController {
 	
 	@RequestMapping(value="/getcandidates/{userId}",method = RequestMethod.GET)
 	
-	public @ResponseBody List<Candidate> loadMyCandidates( @PathVariable int userId){
+	public @ResponseBody List<CandidateResponse> loadMyCandidates( @PathVariable int userId){
 	
 		System.out.println(userId);
-		List<Candidate>candidates=candidateService.loadMyCandidates(userId);
+		List<CandidateResponse>candidates=candidateService.loadMyCandidates(userId);
 	
 		System.out.println(candidates);
 	return candidates;

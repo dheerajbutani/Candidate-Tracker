@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "login_user",schema = "hr")
 public class LoginUser {
@@ -51,6 +53,7 @@ public class LoginUser {
 	private String mobile;
 
 	
+	@JsonIgnore
 	@Transient
 	@OneToMany(mappedBy="loginUser")
 	private List<Candidate> candidates;

@@ -108,6 +108,7 @@ public class UserAccountService {
 
 	public List<LoginUser> getActiveInterviewers(){
 		List<LoginUser>interviewers= userRepository.findByRoleAndAccountStatus(Role.INTERVIEWER,AccountStatus.ACTIVE);
+		System.out.println(interviewers);
 		return interviewers;
 	}
 

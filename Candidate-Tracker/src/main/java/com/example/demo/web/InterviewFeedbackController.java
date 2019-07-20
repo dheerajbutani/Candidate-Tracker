@@ -17,7 +17,7 @@ public class InterviewFeedbackController {
 	@Autowired
 	private InterviewFeedbackService interviewFeedbackService;
 	
-	@RequestMapping(value="/interviewfeedback",method=RequestMethod.PATCH)
+	@RequestMapping(value="/interviewfeedback",method=RequestMethod.POST)
 	public void feedback(@RequestBody Feedback feedback) {
 		interviewFeedbackService.feedback(feedback.getInterviewid(), feedback.getFeedback());
 	}

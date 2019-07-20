@@ -12,21 +12,21 @@ import com.example.demo.model.LoginUser;
 
 public class InterviewResponse {
 
-private int id;
-	
+	private int id;
+
 	private LoginUser interviewer;
 
 	private LocalDate interviewDate;
-	
+
 	private String interviewTime;
-	
+
 	private int round;
-	
+
 	private InterviewStatus status;
-	
+
 	private String feedback;
-	
-	//boolean
+
+	// boolean
 	private int reschedule;
 
 	public InterviewResponse(int id, LoginUser interviewer, LocalDate interviewDate, String interviewTime, int round,
@@ -109,8 +109,5 @@ private int id;
 	public InterviewResponse() {
 		super();
 	}
-	
-	
-	
-	
+
 }

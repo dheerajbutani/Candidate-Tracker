@@ -37,6 +37,7 @@ public class InterviewService {
 		if (candidate.isPresent()) {
 			candidate.get().setRound(candidate.get().getRound() + 1);
 			candidateRepository.save(candidate.get());
+			interview.setRecruiterId(interviewRequest.getRecruiterId());
 			interview.setCandidate(candidate.get());
 			interview.setInterviewer(interviewer.get());
 			interview.setRound(candidate.get().getRound());

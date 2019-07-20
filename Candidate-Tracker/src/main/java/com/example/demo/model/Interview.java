@@ -19,6 +19,8 @@ public class Interview {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
+	private int recruiterId;
+	
 	@ManyToOne
 	private LoginUser interviewer;
 	
@@ -111,17 +113,30 @@ public class Interview {
 		this.reschedule = reschedule;
 	}
 
-	@Override
-	public String toString() {
-		return "Interview [id=" + id + ", interviewer=" + interviewer + ", candidate=" + candidate + ", interviewDate="
-				+ interviewDate + ", interviewTime=" + interviewTime + ", round=" + round + ", status=" + status
-				+ ", feedback=" + feedback + ", reschedule=" + reschedule + "]";
+
+
+	public int getRecruiterId() {
+		return recruiterId;
 	}
 
-	public Interview(int id, LoginUser interviewer, Candidate candidate, LocalDate interviewDate, String interviewTime,
-			int round, InterviewStatus status, String feedback, int reschedule) {
+	public void setRecruiterId(int recruiterId) {
+		this.recruiterId = recruiterId;
+	}
+
+	@Override
+	public String toString() {
+		return "Interview [id=" + id + ", recruiterId=" + recruiterId + ", interviewer=" + interviewer + ", candidate="
+				+ candidate + ", interviewDate=" + interviewDate + ", interviewTime=" + interviewTime + ", round="
+				+ round + ", status=" + status + ", feedback=" + feedback + ", reschedule=" + reschedule + "]";
+	}
+	
+	
+
+	public Interview(int id, int recruiterId, LoginUser interviewer, Candidate candidate, LocalDate interviewDate,
+			String interviewTime, int round, InterviewStatus status, String feedback, int reschedule) {
 		super();
 		this.id = id;
+		this.recruiterId = recruiterId;
 		this.interviewer = interviewer;
 		this.candidate = candidate;
 		this.interviewDate = interviewDate;

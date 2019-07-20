@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 public class InterviewRequest {
 
+	private int recruiterId;
 	private int candidateId;
 	private int interviewerId;
 
@@ -12,8 +13,9 @@ public class InterviewRequest {
 	private LocalDate interviewDate;
 
 
-	public InterviewRequest(int candidateId, int interviewerId, LocalDate interviewDate, String interviewTime) {
+	public InterviewRequest(int recruiterId,int candidateId, int interviewerId, LocalDate interviewDate, String interviewTime) {
 		super();
+		this.recruiterId=recruiterId;
 		this.candidateId = candidateId;
 		this.interviewerId = interviewerId;
 		this.interviewDate = interviewDate;
@@ -22,6 +24,14 @@ public class InterviewRequest {
 
 	public InterviewRequest() {
 
+	}
+
+	public int getRecruiterId() {
+		return recruiterId;
+	}
+
+	public void setRecruiterId(int recruiterId) {
+		this.recruiterId = recruiterId;
 	}
 
 	public int getCandidateId() {

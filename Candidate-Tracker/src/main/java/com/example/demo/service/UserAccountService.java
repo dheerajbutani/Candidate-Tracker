@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,6 +85,7 @@ public class UserAccountService {
 
 	}
 
+	@Transactional
 	public String deactivateAccount(String email, int parentId) {
 
 		System.out.println(parentId);
@@ -109,7 +111,7 @@ public class UserAccountService {
 	
 	
 	
-	
+	@Transactional
 	public void updateAccount(UpdateAccountRequest updateAccountRequest) {
 		Optional<LoginUser> user=userRepository.findById(updateAccountRequest.getId());
 		user.get().setEmail(updateAccountRequest.getEmail());
@@ -122,10 +124,27 @@ public class UserAccountService {
 	
 	
 
+	
 	public List<LoginUser> getActiveInterviewers(){
 		List<LoginUser>interviewers= userRepository.findByRoleAndAccountStatus(Role.INTERVIEWER,AccountStatus.ACTIVE);
 		System.out.println(interviewers);
 		return interviewers;
 	}
+	
+	public List<LoginUser>getMyInterviewers(int id){
+	
+		List<LoginUser>interviewers=new ArrayList<>();
+		List<UserManager>usermanagers=userManagerRepository.findByParentId(id);
+		for(UserManager userManager:usermanagers) {
+		Optional<LoginUser> user=	userRepository.findById(userManager.getChildId());
+			if(user.get().getRole().toString().equals(Role.INTERVIEWER.toString())) {
+				interviewers.add(user.get());
+			}
+	
+		}
+		return interviewers;
+		
+	}
+	
 
 }

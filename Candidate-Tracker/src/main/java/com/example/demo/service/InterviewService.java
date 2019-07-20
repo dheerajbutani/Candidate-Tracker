@@ -41,7 +41,7 @@ public class InterviewService {
 			interview.setCandidate(candidate.get());
 			interview.setInterviewer(interviewer.get());
 			interview.setRound(candidate.get().getRound());
-			interview.setInterviewDate(LocalDate.now());
+			interview.setInterviewDate(interviewRequest.getInterviewDate());
 			interview.setReschedule(0);
 			interview.setStatus(InterviewStatus.PENDING);
 			interviewRepository.save(interview);

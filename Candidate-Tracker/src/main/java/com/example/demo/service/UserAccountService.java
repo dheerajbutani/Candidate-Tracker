@@ -131,20 +131,20 @@ public class UserAccountService {
 		return interviewers;
 	}
 	
-	public List<LoginUser>getMyInterviewers(int id){
-	
-		List<LoginUser>interviewers=new ArrayList<>();
-		List<UserManager>usermanagers=userManagerRepository.findByParentId(id);
-		for(UserManager userManager:usermanagers) {
-		Optional<LoginUser> user=	userRepository.findById(userManager.getChildId());
-			if(user.get().getRole().toString().equals(Role.INTERVIEWER.toString())) {
-				interviewers.add(user.get());
-			}
-	
-		}
-		return interviewers;
-		
-	}
+//	public List<LoginUser>getMyInterviewers(int id){
+//	
+//		List<LoginUser>interviewers=new ArrayList<>();
+//		List<UserManager>usermanagers=userManagerRepository.findByParentId(id);
+//		for(UserManager userManager:usermanagers) {
+//		Optional<LoginUser> user=	userRepository.findById(userManager.getChildId());
+//			if(user.get().getRole().toString().equals(Role.INTERVIEWER.toString())) {
+//				interviewers.add(user.get());
+//			}
+//	
+//		}
+//		return interviewers;
+//		
+//	}
 	
 
 }

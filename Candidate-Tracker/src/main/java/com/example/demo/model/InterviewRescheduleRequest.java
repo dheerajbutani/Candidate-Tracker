@@ -15,10 +15,12 @@ public class InterviewRescheduleRequest {
 	@Id
 	private int id;
 
-	private int candidateId;
-
-	private int interviewerId;
-
+//	private int recruiterId;
+//	
+//	private int candidateId;
+//
+//	private int interviewerId;
+//
 	private LocalDate requestedDate;
 
 	private String requestedTime;
@@ -26,44 +28,76 @@ public class InterviewRescheduleRequest {
 	private String reason;
 	@Enumerated(EnumType.STRING)
 	private RescheduleStatus rescheduleStatus;
-	public InterviewRescheduleRequest(int id, int candidateId, int interviewerId, LocalDate requestedDate,
-			String requestedTime, String reason, RescheduleStatus rescheduleStatus) {
-		super();
-		this.id = id;
-		this.candidateId = candidateId;
-		this.interviewerId = interviewerId;
-		this.requestedDate = requestedDate;
-		this.requestedTime = requestedTime;
-		this.reason = reason;
-		this.rescheduleStatus = rescheduleStatus;
-	}
+	
+
+	
+	private int interviewId;
+	
+//	public int getRecruiterId() {
+//		return recruiterId;
+//	}
+//	public void setRecruiterId(int recruiterId) {
+//		this.recruiterId = recruiterId;
+//	}
+	
 	public InterviewRescheduleRequest() {
 		super();
 	}
+	
+
+
+	public int getInterviewId() {
+		return interviewId;
+	}
+
+
+
+	public void setInterviewId(int interviewId) {
+		this.interviewId = interviewId;
+	}
+
+
+
+	public InterviewRescheduleRequest(int id, LocalDate requestedDate, String requestedTime, String reason,
+		RescheduleStatus rescheduleStatus, int interview) {
+	super();
+	this.id = id;
+	this.requestedDate = requestedDate;
+	this.requestedTime = requestedTime;
+	this.reason = reason;
+	this.rescheduleStatus = rescheduleStatus;
+	this.interviewId = interview;
+}
+
+
+
 	@Override
 	public String toString() {
-		return "InterviewRescheduleRequest [id=" + id + ", candidateId=" + candidateId + ", interviewerId="
-				+ interviewerId + ", requestedDate=" + requestedDate + ", requestedTime=" + requestedTime + ", reason="
-				+ reason + ", rescheduleStatus=" + rescheduleStatus + "]";
+		return "InterviewRescheduleRequest [id=" + id + ", requestedDate=" + requestedDate + ", requestedTime="
+				+ requestedTime + ", reason=" + reason + ", rescheduleStatus=" + rescheduleStatus + ", interview="
+				+ interviewId + "]";
 	}
+
+
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCandidateId() {
-		return candidateId;
-	}
-	public void setCandidateId(int candidateId) {
-		this.candidateId = candidateId;
-	}
-	public int getInterviewerId() {
-		return interviewerId;
-	}
-	public void setInterviewerId(int interviewerId) {
-		this.interviewerId = interviewerId;
-	}
+//	public int getCandidateId() {
+//		return candidateId;
+//	}
+//	public void setCandidateId(int candidateId) {
+//		this.candidateId = candidateId;
+//	}
+//	public int getInterviewerId() {
+//		return interviewerId;
+//	}
+//	public void setInterviewerId(int interviewerId) {
+//		this.interviewerId = interviewerId;
+//	}
 	public LocalDate getRequestedDate() {
 		return requestedDate;
 	}

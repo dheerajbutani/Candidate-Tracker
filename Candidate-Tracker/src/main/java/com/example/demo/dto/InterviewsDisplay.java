@@ -16,6 +16,7 @@ public class InterviewsDisplay {
 	private String email;
 	private String mobile;
 
+	private int recruiterId;
 	private LocalDate interviewDate;
 
 	private String interviewTime;
@@ -31,10 +32,19 @@ public class InterviewsDisplay {
 
 	
 
+	public int getRecruiterId() {
+		return recruiterId;
+	}
+
+	public void setRecruiterId(int recruiterId) {
+		this.recruiterId = recruiterId;
+	}
+
 	public InterviewsDisplay(int id, int candidateId, String firstName, String lastName, String email, String mobile,
 			LocalDate interviewDate, String interviewTime, int round, InterviewStatus status, String feedback,
-			int reschedule) {
+			int reschedule,int recruiterId) {
 		super();
+		this.recruiterId=recruiterId;
 		this.id = id;
 		this.candidateId = candidateId;
 		this.firstName = firstName;
@@ -147,12 +157,14 @@ public class InterviewsDisplay {
 	}
 
 
+	
+
 	@Override
 	public String toString() {
 		return "InterviewsDisplay [id=" + id + ", candidateId=" + candidateId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", mobile=" + mobile + ", interviewDate="
-				+ interviewDate + ", interviewTime=" + interviewTime + ", round=" + round + ", status=" + status
-				+ ", feedback=" + feedback + ", reschedule=" + reschedule + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", mobile=" + mobile + ", recruiterId=" + recruiterId
+				+ ", interviewDate=" + interviewDate + ", interviewTime=" + interviewTime + ", round=" + round
+				+ ", status=" + status + ", feedback=" + feedback + ", reschedule=" + reschedule + "]";
 	}
 
 	public InterviewsDisplay() {

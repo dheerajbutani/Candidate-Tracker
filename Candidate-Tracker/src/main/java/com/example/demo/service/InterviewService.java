@@ -67,6 +67,7 @@ public class InterviewService {
 		interviewsDisplay.setMobile(interview.getCandidate().getMobile());
 		interviewsDisplay.setFeedback(interview.getFeedback());
 		interviewsDisplay.setId(interview.getId());
+		interviewsDisplay.setRecruiterId(interview.getRecruiterId());
 		interviewsDisplay.setInterviewDate(interview.getInterviewDate());
 		interviewsDisplay.setInterviewTime(interview.getInterviewTime());
 		interviewsDisplay.setReschedule(interview.getReschedule());
@@ -85,6 +86,11 @@ public class InterviewService {
 	
 	
 	
+	public void toggleInterviewReschedule(int interviewid) {
+Optional<Interview> interview=		interviewRepository.findById(interviewid);
+	interview.get().setReschedule(1-interview.get().getReschedule());
+	interviewRepository.save(interview.get());
+	}
 	
 	
 }

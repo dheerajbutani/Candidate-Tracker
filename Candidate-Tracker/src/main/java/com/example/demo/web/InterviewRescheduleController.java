@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.InterviewRescheduleRequest;
 import com.example.demo.model.LoginUser;
 import com.example.demo.service.InterviewRescheduleService;
+import com.example.demo.service.InterviewService;
 import com.example.demo.service.UserAccountService;
 
 @CrossOrigin("*")
@@ -21,11 +22,12 @@ public class InterviewRescheduleController {
 	private InterviewRescheduleService interviewRescheduleService;
 	
 	@Autowired
-	private UserAccountService userAccountService;
+private InterviewService interviewService;
 	
 	@RequestMapping(value="/interviewreschedulerequest",method=RequestMethod.POST)
 	public void requestReschedule(@RequestBody InterviewRescheduleRequest interviewRescheduleRequest) {
 		interviewRescheduleService.requestReschedule(interviewRescheduleRequest);
+	interviewService.toggleInterviewReschedule(interviewRescheduleRequest.getInterviewId());
 	}
 	@RequestMapping(value="/getinterviewreschedulerequests/{recruiterid}",method=RequestMethod.GET)
 	public void getreschedulerequests(@PathVariable int recruiterid) {

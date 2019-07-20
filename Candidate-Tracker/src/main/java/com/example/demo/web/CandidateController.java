@@ -1,7 +1,6 @@
 package com.example.demo.web;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,16 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CandidateResponse;
-import com.example.demo.model.Candidate;
-import com.example.demo.model.UserManager;
-import com.example.demo.repository.UserManagerRepository;
 import com.example.demo.service.CandidateService;
-import com.example.demo.service.UserAccountService;
 
 @CrossOrigin("*")
 @RestController

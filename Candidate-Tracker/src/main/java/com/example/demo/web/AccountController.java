@@ -1,7 +1,6 @@
 package com.example.demo.web;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -63,5 +62,12 @@ return useraccountservice.checkAvailability(emailJson);
 		
 	return	useraccountservice.getActiveInterviewers();
 	}
+	
+	
+	@RequestMapping(value="/updateaccount",method=RequestMethod.PATCH)
+	public void updateAccount(@RequestBody UpdateAccountRequest updateAccountRequest) {
+		useraccountservice.updateAccount(updateAccountRequest);
+	}
+	
 	
 }

@@ -13,6 +13,7 @@ import com.example.demo.model.Role;
 import com.example.demo.model.UserManager;
 import com.example.demo.repository.UserManagerRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.web.UpdateAccountRequest;
 
 @Service
 public class UserAccountService {
@@ -41,6 +42,8 @@ public class UserAccountService {
             System.out.println("fail");
            return false;		
 	}
+	
+	
 	
 	
 	@Transactional
@@ -102,6 +105,19 @@ public class UserAccountService {
 		}
 
 		return "You are not an ACTIVE user";
+	}
+	
+	
+	
+	
+	public void updateAccount(UpdateAccountRequest updateAccountRequest) {
+		Optional<LoginUser> user=userRepository.findById(updateAccountRequest.getId());
+		user.get().setEmail(updateAccountRequest.getEmail());
+		user.get().setFirstName(updateAccountRequest.getFirstName());
+		user.get().setLastName(updateAccountRequest.getLastName());
+		user.get().setMobile(updateAccountRequest.getMobile());
+		System.out.println(user);
+		userRepository.save(user.get());
 	}
 	
 	

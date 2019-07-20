@@ -2,11 +2,7 @@ package com.example.demo.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
 
-import com.example.demo.model.Candidate;
 import com.example.demo.model.InterviewStatus;
 import com.example.demo.model.LoginUser;
 

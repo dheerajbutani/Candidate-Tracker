@@ -16,5 +16,7 @@ public interface InterviewRepository extends JpaRepository<Interview, Integer>{
 	List<Interview> findByInterviewerAndStatus(int interviewer_id, InterviewStatus pending);
 
 	List<Interview> findAllByCandidateId(int id);
+
+	List<Interview> findByInterviewerIdAndStatus(int interviewer_id, InterviewStatus interviewStatus);
 	
 }

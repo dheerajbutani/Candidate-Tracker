@@ -91,6 +91,12 @@ Optional<Interview> interview=		interviewRepository.findById(interviewid);
 	interview.get().setReschedule(1-interview.get().getReschedule());
 	interviewRepository.save(interview.get());
 	}
+
+
+
+	public List<Interview> getInterviews(int recruiterid) {
+	return	interviewRepository.findAllByRecruiterId(recruiterid);
+	}
 	
 	
 }

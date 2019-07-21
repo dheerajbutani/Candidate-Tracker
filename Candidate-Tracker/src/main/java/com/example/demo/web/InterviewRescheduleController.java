@@ -1,4 +1,6 @@
-package com.example.demo.web;
+  package com.example.demo.web;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Interview;
 import com.example.demo.model.InterviewRescheduleRequest;
-import com.example.demo.model.LoginUser;
 import com.example.demo.service.InterviewRescheduleService;
 import com.example.demo.service.InterviewService;
-import com.example.demo.service.UserAccountService;
 
 @CrossOrigin("*")
 @RestController
@@ -29,9 +30,28 @@ private InterviewService interviewService;
 		interviewRescheduleService.requestReschedule(interviewRescheduleRequest);
 	interviewService.toggleInterviewReschedule(interviewRescheduleRequest.getInterviewId());
 	}
+	
+	
 	@RequestMapping(value="/getinterviewreschedulerequests/{recruiterid}",method=RequestMethod.GET)
-	public void getreschedulerequests(@PathVariable int recruiterid) {
+	public List<InterviewRescheduleRequest> getreschedulerequests(@PathVariable int recruiterid) {
+	List<Interview>interviews=interviewService.getInterviews(recruiterid);
+	return	interviewRescheduleService.getRescheduleRequests(interviews);
 		
+	}
+	
+	@RequestMapping(value="/approverequest/{requestId}",method=RequestMethod.PATCH)
+	public void approveRequest(@PathVariable int requestId) {
+	interviewRescheduleService.approveRequest(requestId);	
+	
+	int interviewId=interviewRescheduleService.getInterviewId(requestId);
+		interviewService.toggleInterviewReschedule(interviewId);
+	}
+	
+	@RequestMapping(value="/rejectrequest/{requestId}",method=RequestMethod.PATCH)
+	public void rejectRequest(@PathVariable int requestId) {
+		interviewRescheduleService.rejectRequest(requestId);	
+		int interviewId=interviewRescheduleService.getInterviewId(requestId);
+		interviewService.toggleInterviewReschedule(interviewId);
 		
 	}
 

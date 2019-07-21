@@ -40,5 +40,18 @@ public class CandidateController {
 	
 		System.out.println(candidates);
 	return candidates;
-	}	 
+	}	
+	
+	@RequestMapping(value="/offer/{candidateId}",method=RequestMethod.PATCH)
+	public void offer(@PathVariable int candidateId) {
+		candidateService.offer(candidateId);
+	}
+	@RequestMapping(value="/reject/{candidateId}",method=RequestMethod.PATCH)
+	public void reject(int candidateId) {
+		candidateService.reject(candidateId);
+	}
+	@RequestMapping(value="/hold/{candidateId}",method=RequestMethod.PATCH)
+	public void hold(int candidateId) {
+		candidateService.hold(candidateId);
+	}
 }

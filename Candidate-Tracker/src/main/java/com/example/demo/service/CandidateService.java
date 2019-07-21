@@ -53,13 +53,6 @@ public class CandidateService {
 	}
 
 	public List<CandidateResponse> loadMyCandidates(int parentId) {
-		
-		
-		
-		
-		
-		
-		
 		List<CandidateResponse> candidateResponses=new ArrayList<>();
 		
 		List<Candidate> candidates = new ArrayList<>();
@@ -105,6 +98,19 @@ public class CandidateService {
 			candidateResponses.add(candidateResponse);
 		}
 		return candidateResponses;
+	}
+	
+	public void offer(int candidateId) {
+	Optional<Candidate> candidate=candidateRepository.findById(candidateId);
+	candidate.get().setCandidateStatus(CandidateStatus.OFFER);
+	} 
+	public void reject(int candidateId) {
+		Optional<Candidate> candidate=candidateRepository.findById(candidateId);
+		candidate.get().setCandidateStatus(CandidateStatus.REJECT);		
+	}
+	public void hold(int candidateId) {
+		Optional<Candidate> candidate=candidateRepository.findById(candidateId);
+		candidate.get().setCandidateStatus(CandidateStatus.HOLD);		
 	}
 
 }

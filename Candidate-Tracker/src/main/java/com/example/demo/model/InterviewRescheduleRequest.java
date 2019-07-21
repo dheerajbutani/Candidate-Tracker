@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 public class InterviewRescheduleRequest {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 
 //	private int recruiterId;
@@ -20,7 +23,8 @@ public class InterviewRescheduleRequest {
 //	private int candidateId;
 //
 //	private int interviewerId;
-//
+	
+	
 	private LocalDate requestedDate;
 
 	private String requestedTime;

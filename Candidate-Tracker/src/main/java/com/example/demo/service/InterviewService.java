@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.InterviewsDisplay;
 import com.example.demo.model.Candidate;
+import com.example.demo.model.CandidateStatus;
 import com.example.demo.model.Interview;
+import com.example.demo.model.InterviewRescheduleRequest;
 import com.example.demo.model.InterviewStatus;
 import com.example.demo.model.LoginUser;
 import com.example.demo.repository.CandidateRepository;
@@ -36,6 +37,7 @@ public class InterviewService {
 		Optional<Candidate> candidate = candidateRepository.findById(interviewRequest.getCandidateId());
 		if (candidate.isPresent()) {
 			candidate.get().setRound(candidate.get().getRound() + 1);
+			candidate.get().setCandidateStatus(CandidateStatus.UNDERINTERVIEW);
 			candidateRepository.save(candidate.get());
 			interview.setRecruiterId(interviewRequest.getRecruiterId());
 			interview.setCandidate(candidate.get());
@@ -86,17 +88,27 @@ public class InterviewService {
 	
 	
 	
-	public void toggleInterviewReschedule(int interviewid) {
+	public void setInterviewReschedule(int interviewid) {
 Optional<Interview> interview=		interviewRepository.findById(interviewid);
-	interview.get().setReschedule(1-interview.get().getReschedule());
+	interview.get().setReschedule(1);
 	interviewRepository.save(interview.get());
 	}
-
+	public void resetInterviewReschedule(int interviewid) {
+		Optional<Interview> interview=		interviewRepository.findById(interviewid);
+			interview.get().setReschedule(0);
+			interviewRepository.save(interview.get());
+			}
 
 
 	public List<Interview> getInterviews(int recruiterid) {
 	return	interviewRepository.findAllByRecruiterId(recruiterid);
 	}
 	
+	public void approveRequest(InterviewRescheduleRequest interviewRescheduleRequest) {
+	Optional<Interview> interview=	interviewRepository.findById(interviewRescheduleRequest.getInterviewId());
+		interview.get().setInterviewDate(interviewRescheduleRequest.getRequestedDate());
+		interview.get().setInterviewTime(interviewRescheduleRequest.getRequestedTime());
+		interviewRepository.save(interview.get());
+	}
 	
 }

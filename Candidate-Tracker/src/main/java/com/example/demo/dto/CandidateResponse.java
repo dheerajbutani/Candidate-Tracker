@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import java.util.List;
 
+import com.example.demo.model.CandidateStatus;
+
 
 
 public class CandidateResponse {
@@ -22,10 +24,13 @@ public class CandidateResponse {
 	
 	private String preferredLocation;
 	
+	private CandidateStatus candidateStatus;
+	
 	private Double currentCtc;
 	
 	private Double expectedCtc;
 
+	
 	private List<InterviewResponse>interviewResponses;
 	
 	
@@ -168,9 +173,19 @@ public class CandidateResponse {
 
 
 
+	@Override
+	public String toString() {
+		return "CandidateResponse [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", mobile=" + mobile + ", address=" + address + ", currentLocation=" + currentLocation
+				+ ", preferredLocation=" + preferredLocation + ", candidateStatus=" + candidateStatus + ", currentCtc="
+				+ currentCtc + ", expectedCtc=" + expectedCtc + ", interviewResponses=" + interviewResponses + "]";
+	}
+
+
+
 	public CandidateResponse(int id, String email, String firstName, String lastName, String mobile, String address,
-			String currentLocation, String preferredLocation, Double currentCtc, Double expectedCtc,
-			List<InterviewResponse> interviewResponses) {
+			String currentLocation, String preferredLocation, CandidateStatus candidateStatus, Double currentCtc,
+			Double expectedCtc, List<InterviewResponse> interviewResponses) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -180,11 +195,27 @@ public class CandidateResponse {
 		this.address = address;
 		this.currentLocation = currentLocation;
 		this.preferredLocation = preferredLocation;
+		this.candidateStatus = candidateStatus;
 		this.currentCtc = currentCtc;
 		this.expectedCtc = expectedCtc;
 		this.interviewResponses = interviewResponses;
 	}
 
+
+
+	public CandidateStatus getCandidateStatus() {
+		return candidateStatus;
+	}
+
+
+
+	public void setCandidateStatus(CandidateStatus candidateStatus) {
+		this.candidateStatus = candidateStatus;
+	}
+
+
+
+	
 
 	
 }

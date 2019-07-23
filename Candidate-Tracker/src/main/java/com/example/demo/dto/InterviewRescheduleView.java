@@ -10,38 +10,62 @@ import com.example.demo.model.RescheduleStatus;
 public class InterviewRescheduleView {
 	private int id;	
 	
-	private LocalDate requestedDate;
+	private String requestedStartTime;
 
-	private String requestedTime;
+	private String requestedEndTime;
 
 	private String reason;
 	
-	private LocalDate currentDate;
+	private String currentStartTime;
 	
-	private String currentTime;
+	private String currentEndTime;
 	
 	private RescheduleStatus rescheduleStatus;
 	
 	private int interviewId;
+	
+	private String interviewerName;
+	
+	private String candidateName;
+	
 
-	public InterviewRescheduleView(int id, LocalDate requestedDate, String requestedTime, String reason,
-			LocalDate currentDate, String currentTime, RescheduleStatus rescheduleStatus, int interviewId) {
+	
+
+
+	
+	
+
+
+	public InterviewRescheduleView(int id, String requestedStartTime, String requestedEndTime, String reason,
+			String currentStartTime, String currentEndTime, RescheduleStatus rescheduleStatus, int interviewId,
+			String interviewerName, String candidateName) {
 		super();
 		this.id = id;
-		this.requestedDate = requestedDate;
-		this.requestedTime = requestedTime;
+		this.requestedStartTime = requestedStartTime;
+		this.requestedEndTime = requestedEndTime;
 		this.reason = reason;
-		this.currentDate = currentDate;
-		this.currentTime = currentTime;
+		this.currentStartTime = currentStartTime;
+		this.currentEndTime = currentEndTime;
 		this.rescheduleStatus = rescheduleStatus;
 		this.interviewId = interviewId;
+		this.interviewerName = interviewerName;
+		this.candidateName = candidateName;
 	}
 
-	@Override
-	public String toString() {
-		return "InterviewRescheduleView [id=" + id + ", requestedDate=" + requestedDate + ", requestedTime="
-				+ requestedTime + ", reason=" + reason + ", currentDate=" + currentDate + ", currentTime=" + currentTime
-				+ ", rescheduleStatus=" + rescheduleStatus + ", interviewId=" + interviewId + "]";
+	public String getInterviewerName() {
+		return interviewerName;
+	}
+
+	public void setInterviewerName(String interviewerName) {
+		this.interviewerName = interviewerName;
+	}
+
+	public String getCandidateName() {
+		return candidateName;
+	}
+
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
 	}
 
 	public int getId() {
@@ -52,20 +76,33 @@ public class InterviewRescheduleView {
 		this.id = id;
 	}
 
-	public LocalDate getRequestedDate() {
-		return requestedDate;
+	
+
+	public String getRequestedStartTime() {
+		return requestedStartTime;
 	}
 
-	public void setRequestedDate(LocalDate requestedDate) {
-		this.requestedDate = requestedDate;
+	public void setRequestedStartTime(String requestedStartTime) {
+		this.requestedStartTime = requestedStartTime;
 	}
 
-	public String getRequestedTime() {
-		return requestedTime;
+	public String getRequestedEndTime() {
+		return requestedEndTime;
 	}
 
-	public void setRequestedTime(String requestedTime) {
-		this.requestedTime = requestedTime;
+	public void setRequestedEndTime(String requestedEndTime) {
+		this.requestedEndTime = requestedEndTime;
+	}
+
+	
+
+	@Override
+	public String toString() {
+		return "InterviewRescheduleView [id=" + id + ", requestedStartTime=" + requestedStartTime
+				+ ", requestedEndTime=" + requestedEndTime + ", reason=" + reason + ", currentStartTime="
+				+ currentStartTime + ", currentEndTime=" + currentEndTime + ", rescheduleStatus=" + rescheduleStatus
+				+ ", interviewId=" + interviewId + ", interviewerName=" + interviewerName + ", candidateName="
+				+ candidateName + "]";
 	}
 
 	public String getReason() {
@@ -76,20 +113,22 @@ public class InterviewRescheduleView {
 		this.reason = reason;
 	}
 
-	public LocalDate getCurrentDate() {
-		return currentDate;
+	
+
+	public String getCurrentStartTime() {
+		return currentStartTime;
 	}
 
-	public void setCurrentDate(LocalDate currentDate) {
-		this.currentDate = currentDate;
+	public void setCurrentStartTime(String currentStartTime) {
+		this.currentStartTime = currentStartTime;
 	}
 
-	public String getCurrentTime() {
-		return currentTime;
+	public String getCurrentEndTime() {
+		return currentEndTime;
 	}
 
-	public void setCurrentTime(String currentTime) {
-		this.currentTime = currentTime;
+	public void setCurrentEndTime(String currentEndTime) {
+		this.currentEndTime = currentEndTime;
 	}
 
 	public RescheduleStatus getRescheduleStatus() {

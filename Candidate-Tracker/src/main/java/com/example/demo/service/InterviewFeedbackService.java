@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.FeedbackResponse;
 import com.example.demo.model.Interview;
@@ -16,11 +17,13 @@ public class InterviewFeedbackService {
 	@Autowired
 	private InterviewRepository interviewRepository;
 
+	
+	@Transactional
 	public void feedback(int id, String feedback) {
 		Optional<Interview> interview = interviewRepository.findById(id);
 		interview.get().setFeedback(feedback);
 		interview.get().setStatus(InterviewStatus.COMPLETED);
-		interviewRepository.save(interview.get());
+//		interviewRepository.save(interview.get());
 
 	}
 	

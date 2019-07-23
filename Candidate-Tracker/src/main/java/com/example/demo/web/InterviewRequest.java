@@ -8,18 +8,11 @@ public class InterviewRequest {
 	private int candidateId;
 	private int interviewerId;
 
-	private String interviewTime;
-	private LocalDate interviewDate;
+	private String interviewStartTime;
+	private String interviewEndTime;
 
 
-	public InterviewRequest(int recruiterId,int candidateId, int interviewerId, LocalDate interviewDate, String interviewTime) {
-		super();
-		this.recruiterId=recruiterId;
-		this.candidateId = candidateId;
-		this.interviewerId = interviewerId;
-		this.interviewDate = interviewDate;
-		this.interviewTime = interviewTime;
-	}
+	
 
 	public InterviewRequest() {
 
@@ -49,26 +42,39 @@ public class InterviewRequest {
 		this.interviewerId = interviewerId;
 	}
 
-	public LocalDate getInterviewDate() {
-		return interviewDate;
+	public String getInterviewStartTime() {
+		return interviewStartTime;
 	}
 
-	public void setInterviewDate(LocalDate interviewDate) {
-		this.interviewDate = interviewDate;
+	public void setInterviewStartTime(String interviewStartTime) {
+		this.interviewStartTime = interviewStartTime;
 	}
 
-	public String getInterviewTime() {
-		return interviewTime;
+	public String getInterviewEndTime() {
+		return interviewEndTime;
 	}
 
-	public void setInterviewTime(String interviewTime) {
-		this.interviewTime = interviewTime;
+	public void setInterviewEndTime(String interviewEndTime) {
+		this.interviewEndTime = interviewEndTime;
+	}
+
+	public InterviewRequest(int recruiterId, int candidateId, int interviewerId, String interviewStartTime,
+			String interviewEndTime) {
+		super();
+		this.recruiterId = recruiterId;
+		this.candidateId = candidateId;
+		this.interviewerId = interviewerId;
+		this.interviewStartTime = interviewStartTime;
+		this.interviewEndTime = interviewEndTime;
 	}
 
 	@Override
 	public String toString() {
-		return "InterviewRequest [candidateId=" + candidateId + ", interviewerId=" + interviewerId + ", interviewDate="
-				+ interviewDate + ", interviewTime=" + interviewTime + "]";
+		return "InterviewRequest [recruiterId=" + recruiterId + ", candidateId=" + candidateId + ", interviewerId="
+				+ interviewerId + ", interviewStartTime=" + interviewStartTime + ", interviewEndTime="
+				+ interviewEndTime + "]";
 	}
+
+
 
 }

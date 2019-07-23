@@ -8,14 +8,19 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+@DynamicUpdate
 @Entity
 @Table(name = "Interview_reschedule_request")
 public class InterviewRescheduleRequest {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "interview_reschedule_sequence")
+	@SequenceGenerator(name="interview_reschedule_sequence", sequenceName="interview_reschedule_sequence", allocationSize=1)
 	private int id;
 
 //	private int recruiterId;
@@ -25,9 +30,9 @@ public class InterviewRescheduleRequest {
 //	private int interviewerId;
 	
 	
-	private LocalDate requestedDate;
+	private String requestedStartTime;
 
-	private String requestedTime;
+	private String requestedEndTime;
 
 	private String reason;
 	@Enumerated(EnumType.STRING)
@@ -62,24 +67,55 @@ public class InterviewRescheduleRequest {
 
 
 
-	public InterviewRescheduleRequest(int id, LocalDate requestedDate, String requestedTime, String reason,
-		RescheduleStatus rescheduleStatus, int interview) {
-	super();
-	this.id = id;
-	this.requestedDate = requestedDate;
-	this.requestedTime = requestedTime;
-	this.reason = reason;
-	this.rescheduleStatus = rescheduleStatus;
-	this.interviewId = interview;
-}
+	
 
+
+
+	public String getRequestedStartTime() {
+		return requestedStartTime;
+	}
+
+
+
+	public void setRequestedStartTime(String requestedStartTime) {
+		this.requestedStartTime = requestedStartTime;
+	}
+
+
+
+	public String getRequestedEndTime() {
+		return requestedEndTime;
+	}
+
+
+
+	public void setRequestedEndTime(String requestedEndTime) {
+		this.requestedEndTime = requestedEndTime;
+	}
+
+
+
+	
 
 
 	@Override
 	public String toString() {
-		return "InterviewRescheduleRequest [id=" + id + ", requestedDate=" + requestedDate + ", requestedTime="
-				+ requestedTime + ", reason=" + reason + ", rescheduleStatus=" + rescheduleStatus + ", interview="
-				+ interviewId + "]";
+		return "InterviewRescheduleRequest [id=" + id + ", requestedStartTime=" + requestedStartTime
+				+ ", requestedEndTime=" + requestedEndTime + ", reason=" + reason + ", rescheduleStatus="
+				+ rescheduleStatus + ", interviewId=" + interviewId + "]";
+	}
+
+
+
+	public InterviewRescheduleRequest(int id, String requestedStartTime, String requestedEndTime, String reason,
+			RescheduleStatus rescheduleStatus, int interviewId) {
+		super();
+		this.id = id;
+		this.requestedStartTime = requestedStartTime;
+		this.requestedEndTime = requestedEndTime;
+		this.reason = reason;
+		this.rescheduleStatus = rescheduleStatus;
+		this.interviewId = interviewId;
 	}
 
 
@@ -102,18 +138,7 @@ public class InterviewRescheduleRequest {
 //	public void setInterviewerId(int interviewerId) {
 //		this.interviewerId = interviewerId;
 //	}
-	public LocalDate getRequestedDate() {
-		return requestedDate;
-	}
-	public void setRequestedDate(LocalDate requestedDate) {
-		this.requestedDate = requestedDate;
-	}
-	public String getRequestedTime() {
-		return requestedTime;
-	}
-	public void setRequestedTime(String requestedTime) {
-		this.requestedTime = requestedTime;
-	}
+	
 	public String getReason() {
 		return reason;
 	}

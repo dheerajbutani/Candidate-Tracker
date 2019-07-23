@@ -9,17 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+@DynamicUpdate
 @Entity
 @Table(name="Interview")
 public class Interview {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "interview_sequence")
+	@SequenceGenerator(name="interview_sequence", sequenceName="interview_sequence", allocationSize=1)
 	private int id;
 	
 	private int recruiterId;
+	
+	
 	
 	@ManyToOne
 	private LoginUser interviewer;
@@ -27,9 +34,9 @@ public class Interview {
 	@ManyToOne
 	private Candidate candidate;
 	
-	private LocalDate interviewDate;
+	private String interviewStartTime;
 	
-	private String interviewTime;
+	private String interviewEndTime;
 	
 	private int round;
 	
@@ -65,21 +72,7 @@ public class Interview {
 		this.candidate = candidate;
 	}
 
-	public LocalDate getInterviewDate() {
-		return interviewDate;
-	}
-
-	public void setInterviewDate(LocalDate interviewDate) {
-		this.interviewDate = interviewDate;
-	}
-
-	public String getInterviewTime() {
-		return interviewTime;
-	}
-
-	public void setInterviewTime(String interviewTime) {
-		this.interviewTime = interviewTime;
-	}
+	
 
 	public int getRound() {
 		return round;
@@ -123,24 +116,40 @@ public class Interview {
 		this.recruiterId = recruiterId;
 	}
 
+	
+	public String getInterviewStartTime() {
+		return interviewStartTime;
+	}
+
+	public void setInterviewStartTime(String interviewStartTime) {
+		this.interviewStartTime = interviewStartTime;
+	}
+
+	public String getInterviewEndTime() {
+		return interviewEndTime;
+	}
+
+	public void setInterviewEndTime(String interviewEndTime) {
+		this.interviewEndTime = interviewEndTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Interview [id=" + id + ", recruiterId=" + recruiterId + ", interviewer=" + interviewer + ", candidate="
-				+ candidate + ", interviewDate=" + interviewDate + ", interviewTime=" + interviewTime + ", round="
-				+ round + ", status=" + status + ", feedback=" + feedback + ", reschedule=" + reschedule + "]";
+				+ candidate + ", interviewStartTime=" + interviewStartTime + ", interviewEndTime=" + interviewEndTime
+				+ ", round=" + round + ", status=" + status + ", feedback=" + feedback + ", reschedule=" + reschedule
+				+ "]";
 	}
-	
-	
 
-	public Interview(int id, int recruiterId, LoginUser interviewer, Candidate candidate, LocalDate interviewDate,
-			String interviewTime, int round, InterviewStatus status, String feedback, int reschedule) {
+	public Interview(int id, int recruiterId, LoginUser interviewer, Candidate candidate, String interviewStartTime,
+			String interviewEndTime, int round, InterviewStatus status, String feedback, int reschedule) {
 		super();
 		this.id = id;
 		this.recruiterId = recruiterId;
 		this.interviewer = interviewer;
 		this.candidate = candidate;
-		this.interviewDate = interviewDate;
-		this.interviewTime = interviewTime;
+		this.interviewStartTime = interviewStartTime;
+		this.interviewEndTime = interviewEndTime;
 		this.round = round;
 		this.status = status;
 		this.feedback = feedback;

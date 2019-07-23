@@ -11,7 +11,7 @@ import com.example.demo.model.UserManager;
 @Repository
 public interface UserManagerRepository extends JpaRepository<UserManager, Integer>{
 
-	List<Optional<UserManager>> findByChildId(int i);
+	List<UserManager> findByChildId(int i);
 
 	List<UserManager> findByParentId(int id);
 

@@ -17,9 +17,9 @@ public class InterviewsDisplay {
 	private String mobile;
 
 	private int recruiterId;
-	private LocalDate interviewDate;
+	private String interviewStartTime;
 
-	private String interviewTime;
+	private String interviewEndTime;
 
 	private int round;
 
@@ -40,19 +40,21 @@ public class InterviewsDisplay {
 		this.recruiterId = recruiterId;
 	}
 
+
+
 	public InterviewsDisplay(int id, int candidateId, String firstName, String lastName, String email, String mobile,
-			LocalDate interviewDate, String interviewTime, int round, InterviewStatus status, String feedback,
-			int reschedule,int recruiterId) {
+			int recruiterId, String interviewStartTime, String interviewEndTime, int round, InterviewStatus status,
+			String feedback, int reschedule) {
 		super();
-		this.recruiterId=recruiterId;
 		this.id = id;
 		this.candidateId = candidateId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.mobile = mobile;
-		this.interviewDate = interviewDate;
-		this.interviewTime = interviewTime;
+		this.recruiterId = recruiterId;
+		this.interviewStartTime = interviewStartTime;
+		this.interviewEndTime = interviewEndTime;
 		this.round = round;
 		this.status = status;
 		this.feedback = feedback;
@@ -108,20 +110,23 @@ public class InterviewsDisplay {
 	}
 
 	
-	public LocalDate getInterviewDate() {
-		return interviewDate;
+
+	public String getInterviewStartTime() {
+		return interviewStartTime;
 	}
 
-	public void setInterviewDate(LocalDate interviewDate) {
-		this.interviewDate = interviewDate;
+	public void setInterviewStartTime(String interviewStartTime) {
+		this.interviewStartTime = interviewStartTime;
 	}
 
-	public String getInterviewTime() {
-		return interviewTime;
+	public String getInterviewEndTime() {
+		return interviewEndTime;
 	}
+	
+	
 
-	public void setInterviewTime(String interviewTime) {
-		this.interviewTime = interviewTime;
+	public void setInterviewEndTime(String interviewEndTime) {
+		this.interviewEndTime = interviewEndTime;
 	}
 
 	public int getRound() {
@@ -159,12 +164,14 @@ public class InterviewsDisplay {
 
 	
 
+
+
 	@Override
 	public String toString() {
 		return "InterviewsDisplay [id=" + id + ", candidateId=" + candidateId + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", email=" + email + ", mobile=" + mobile + ", recruiterId=" + recruiterId
-				+ ", interviewDate=" + interviewDate + ", interviewTime=" + interviewTime + ", round=" + round
-				+ ", status=" + status + ", feedback=" + feedback + ", reschedule=" + reschedule + "]";
+				+ ", interviewStartTime=" + interviewStartTime + ", interviewEndTime=" + interviewEndTime + ", round="
+				+ round + ", status=" + status + ", feedback=" + feedback + ", reschedule=" + reschedule + "]";
 	}
 
 	public InterviewsDisplay() {

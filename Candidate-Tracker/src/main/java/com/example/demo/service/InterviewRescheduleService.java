@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.InterviewRescheduleView;
 import com.example.demo.model.Interview;
@@ -19,13 +20,15 @@ public class InterviewRescheduleService {
 	@Autowired
 	private InterviewRescheduleRepository interviewRescheduleRepository;
 	
-
+@Autowired
+private InterviewService interviewService;
 
 	
+	@Transactional
 	public void requestReschedule(InterviewRescheduleRequest interviewRescheduleRequest) {
 		interviewRescheduleRequest.setRescheduleStatus(RescheduleStatus.AWAITINGRESPONSE);
 		
-		
+		System.out.println(interviewRescheduleRequest);
 		
 		interviewRescheduleRepository.save(interviewRescheduleRequest);
 		
@@ -50,34 +53,42 @@ public class InterviewRescheduleService {
 			return	interview.getId()==request.getInterviewId();
 				
 			}).forEach((interview)->{
-				view.setCurrentDate(interview.getInterviewDate());
-				view.setCurrentTime(interview.getInterviewTime());
-			});;
+				view.setCurrentStartTime(interview.getInterviewStartTime());
+				view.setCurrentEndTime(interview.getInterviewEndTime());
+			});
+			
 		view.setId(request.getId());
 		view.setInterviewId(request.getInterviewId());
+		
+		view.setCandidateName(interviewService.getCandidateName(request.getInterviewId()));
+		view.setInterviewerName(interviewService.getInterviewerName(request.getInterviewId()));
 		view.setReason(request.getReason());
-		view.setRequestedDate(request.getRequestedDate());
-		view.setRequestedTime(request.getRequestedTime());
+		view.setRequestedStartTime(request.getRequestedStartTime());
+		view.setRequestedEndTime(request.getRequestedEndTime());
 		view.setRescheduleStatus(request.getRescheduleStatus());
+		
 		myRequests.add(view);
 		
 		});
 		
 	return myRequests;
 	}
+	@Transactional
 	public void approveRequest(int requestId) {
 	Optional<InterviewRescheduleRequest> request=	interviewRescheduleRepository.findById(requestId);
 		request.get().setRescheduleStatus(RescheduleStatus.APPROVED);
-	interviewRescheduleRepository.save(request.get());
+//	interviewRescheduleRepository.save(request.get());
 
 
 	}
 
+	@Transactional
 	public void rejectRequest(int requestId) {
 		Optional<InterviewRescheduleRequest> request=	interviewRescheduleRepository.findById(requestId);
 			request.get().setRescheduleStatus(RescheduleStatus.REJECTED);
-		interviewRescheduleRepository.save(request.get());
+//		interviewRescheduleRepository.save(request.get());
 		}
+	
 	public  int getInterviewId(int requestId) {
 	
 	return	interviewRescheduleRepository.findById(requestId).get().getInterviewId();

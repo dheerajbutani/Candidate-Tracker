@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,16 +10,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="Candidate")
 public class Candidate {
 
+	
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "candidate_sequence")
+	@SequenceGenerator(name="candidate_sequence", sequenceName="candidate_sequence", allocationSize=1)
 	private int id;
 	
 	private String email;
@@ -37,11 +43,12 @@ public class Candidate {
 	
 	private Double currentCtc;
 	
-	private Double expectedCtc;
+	private Double expectedCtc; 
 
 	private int round;
 	@Enumerated(EnumType.STRING)
 	private CandidateStatus candidateStatus;
+	
 	 LocalDate profileCreationDate;
 
 	@JsonIgnore

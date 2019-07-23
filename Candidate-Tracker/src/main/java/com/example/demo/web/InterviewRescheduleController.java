@@ -36,6 +36,7 @@ private InterviewService interviewService;
 	@RequestMapping(value="/getinterviewreschedulerequests/{recruiterid}",method=RequestMethod.GET)
 	public List<InterviewRescheduleView> getreschedulerequests(@PathVariable int recruiterid) {
 	List<Interview>interviews=interviewService.getInterviews(recruiterid);
+	
 	return	interviewRescheduleService.getRescheduleRequests(interviews);
 		
 	}	
@@ -43,7 +44,7 @@ private InterviewService interviewService;
 	public void approveRequest(@PathVariable int requestId) {
 	interviewRescheduleService.approveRequest(requestId);	
 InterviewRescheduleRequest interviewRescheduleRequest=	interviewRescheduleService.getRescheduleRequests(requestId);
-	interviewService.approveRequest(interviewRescheduleRequest);
+	interviewRescheduleService.approveRequest(interviewRescheduleRequest.getId());
 	int interviewId=interviewRescheduleService.getInterviewId(requestId);
 		interviewService.resetInterviewReschedule(interviewId);
 	}

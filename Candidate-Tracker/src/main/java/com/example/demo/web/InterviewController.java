@@ -26,8 +26,8 @@ public void addInterview(@RequestBody InterviewRequest interviewRequest) {
 	interviewService.addInterview(interviewRequest);
 }
 
-@RequestMapping(value="/getinterview/{interviewerid}/{interviewstatus}",method=RequestMethod.GET)
-public List<InterviewsDisplay> getInterview(@PathVariable int interviewerid ,@PathVariable InterviewStatus interviewstatus) {
-return	interviewService.getInterviews(interviewerid, interviewstatus);
+@RequestMapping(value="/getinterview/{interviewerid}",method=RequestMethod.GET)
+public List<InterviewsDisplay> getInterview(@PathVariable int interviewerid) {
+return	interviewService.getMyInterviews(interviewerid);
 }
 }

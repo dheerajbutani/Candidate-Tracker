@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class LoginUser {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "login_sequence")
+	  @SequenceGenerator(name="login_sequence", sequenceName="login_sequence", allocationSize=1)
 	private int id;
 	
 	private String email;

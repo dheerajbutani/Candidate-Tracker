@@ -12,4 +12,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Integer>{
 
 	List<Candidate> findByLoginUserId(int childId);
 
+	
+
 }

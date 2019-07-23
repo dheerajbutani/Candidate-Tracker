@@ -1,11 +1,14 @@
 package com.example.demo.service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.InterviewsDisplay;
 import com.example.demo.model.Candidate;
@@ -29,6 +32,7 @@ public class InterviewService {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Transactional
 	public void addInterview(InterviewRequest interviewRequest) {
 
 		Interview interview=new Interview();
@@ -43,7 +47,8 @@ public class InterviewService {
 			interview.setCandidate(candidate.get());
 			interview.setInterviewer(interviewer.get());
 			interview.setRound(candidate.get().getRound());
-			interview.setInterviewDate(interviewRequest.getInterviewDate());
+			interview.setInterviewStartTime(interviewRequest.getInterviewStartTime());
+			interview.setInterviewEndTime(interviewRequest.getInterviewEndTime());
 			interview.setReschedule(0);
 			interview.setStatus(InterviewStatus.PENDING);
 			interviewRepository.save(interview);
@@ -54,8 +59,8 @@ public class InterviewService {
 		
 	
 	
-	public List<InterviewsDisplay> getInterviews(int interviewer_id,InterviewStatus interviewStatus) {
-	List<Interview>interviews=interviewRepository.findByInterviewerIdAndStatus(interviewer_id,interviewStatus);
+	public List<InterviewsDisplay> getMyInterviews(int interviewer_id) {
+	List<Interview>interviews=interviewRepository.findByInterviewerId(interviewer_id);
 	
 	List<InterviewsDisplay> interviewsDisplayList=new ArrayList<>();
 	
@@ -70,8 +75,8 @@ public class InterviewService {
 		interviewsDisplay.setFeedback(interview.getFeedback());
 		interviewsDisplay.setId(interview.getId());
 		interviewsDisplay.setRecruiterId(interview.getRecruiterId());
-		interviewsDisplay.setInterviewDate(interview.getInterviewDate());
-		interviewsDisplay.setInterviewTime(interview.getInterviewTime());
+		interviewsDisplay.setInterviewStartTime(interview.getInterviewStartTime());
+		interviewsDisplay.setInterviewEndTime(interview.getInterviewEndTime());
 		interviewsDisplay.setReschedule(interview.getReschedule());
 		interviewsDisplay.setRound(interview.getRound());
 		interviewsDisplay.setStatus(interview.getStatus());
@@ -87,16 +92,30 @@ public class InterviewService {
 	
 	
 	
-	
+	@Transactional
 	public void setInterviewReschedule(int interviewid) {
+		System.out.println("kegmgd");
 Optional<Interview> interview=		interviewRepository.findById(interviewid);
-	interview.get().setReschedule(1);
-	interviewRepository.save(interview.get());
+Interview inter=interview.get();
+System.out.println(inter);
+//interview.get().setInterviewEndTime(sdf.format((interview.get().getInterviewEndTime()).toString()));
+//interview.get().setInterviewEndTime(sdf.format(interview.get().getInterviewStartTime()).toString());
+//System.out.println("time:"+interview.get());
+	inter.setReschedule(1);
+	interviewRepository.save(inter);
 	}
+	
+//	SimpleDateFormat sdf=new SimpleDateFormat("dd-MMM-yy hh:mm:ss");
+	@Transactional
 	public void resetInterviewReschedule(int interviewid) {
 		Optional<Interview> interview=		interviewRepository.findById(interviewid);
 			interview.get().setReschedule(0);
+//			interview.get().setInterviewEndTime(sdf.format((interview.get().getInterviewEndTime()).toString()));
+//			interview.get().setInterviewEndTime(sdf.format(interview.get().getInterviewStartTime()).toString());
+			System.out.println("time:"+interview.get());
 			interviewRepository.save(interview.get());
+			
+			
 			}
 
 
@@ -104,11 +123,18 @@ Optional<Interview> interview=		interviewRepository.findById(interviewid);
 	return	interviewRepository.findAllByRecruiterId(recruiterid);
 	}
 	
-	public void approveRequest(InterviewRescheduleRequest interviewRescheduleRequest) {
-	Optional<Interview> interview=	interviewRepository.findById(interviewRescheduleRequest.getInterviewId());
-		interview.get().setInterviewDate(interviewRescheduleRequest.getRequestedDate());
-		interview.get().setInterviewTime(interviewRescheduleRequest.getRequestedTime());
-		interviewRepository.save(interview.get());
+//	@Transactional
+//	public void approveRequest(InterviewRescheduleRequest interviewRescheduleRequest) {
+//	Optional<Interview> interview=	interviewRepository.findById(interviewRescheduleRequest.getInterviewId());
+//		interview.get().setInterviewStartTime(interviewRescheduleRequest.getRequestedStartTime());
+//		interview.get().setInterviewEndTime(interviewRescheduleRequest.getRequestedEndTime());
+////		interviewRepository.save(interview.get());
+//	}
+//	
+	public String getInterviewerName(int id) {
+		return interviewRepository.findById(id).get().getInterviewer().getFirstName();
 	}
-	
+	public String getCandidateName(int id) {
+		return interviewRepository.findById(id).get().getCandidate().getFirstName();
+	}
 }
